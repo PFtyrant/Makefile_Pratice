@@ -1,0 +1,47 @@
+# test command : make -f Makefile.autovarible clean
+# output:
+#This is Main. 
+#This is a hamburger.
+#THis is kiwi!
+#THis is orange!
+
+CC=gcc
+CFLAGS=-c -o
+OBJECTS=fruits/kiwi.o fruits/orange.o hamburger.o main.o
+
+
+# $@ : 타겟 정보를 대입함
+# $^ : 선행정보란에 출현한 모든것을 대입함
+# $< : 선행정보란에서 첫번째로 출현한것을 대입함
+# $* : stem, 타겟에서 확장자를 제외한 값
+
+juice: $(OBJECTS)
+	$(CC) -o $@ $^
+	@echo The first prerequisite is: $<
+	@echo Target Directory: $(@D)
+	@echo Target File: $(@F)
+	@echo Target stem Directory: $(*D)
+	@echo Target stem File: $(*F)
+
+fruits/kiwi.o:fruits/kiwi.c
+	@echo $@ $*
+	$(CC) $(CFLAGS) $@ $<
+	@echo Target stem Directory: $(*D)
+	@echo Target stem File: $(*F)
+
+fruits/orange.o:fruits/orange.c
+	@echo $@ $*
+	$(CC) $(CFLAGS) $@ $<
+
+hamburger.o:hamburger.c
+	@echo $@ $*
+	$(CC) $(CFLAGS) $@ $<
+
+main.o:main.c
+	@echo $@ $*
+	$(CC) $(CFLAGS) $@ $<
+
+clean:
+	rm -rf juice
+	rm -rf *.o
+	rm -rf fruits/*.o

@@ -1,0 +1,16 @@
+# make -f Makefile.arguments food=omelet drink=coffee
+# 어떤 operator로 변수가 대입 되어있건, 명령행에서 대입된다면, 무조건 명령행 대입된 값을 사용한다.
+
+#변수의 정의에는 우선 순위가 존재한다.
+# 명령행 > Makefile 내에 정의된 변수 > 환경변수
+# makefile 내에서 정의된 변수가 존재하고, 환경변수에서 똑같은 변수를 선언하고 정의한다면, 출력이 되는것은 Makefile내 정의된 변수이다.
+
+# make -f Makefile.arguments food=test
+# Makefile_Pratice/ch2/ch2.3 (main) $ env | grep food
+# food=sandwich
+
+#food := hamburger
+drink = cola
+
+print:
+	@echo $(food) $(drink)
