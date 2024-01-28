@@ -14,7 +14,8 @@ OBJECTS=fruits/kiwi.o fruits/orange.o hamburger.o main.o
 # $^ : 선행정보란에 출현한 모든것을 대입함
 # $< : 선행정보란에서 첫번째로 출현한것을 대입함
 # $* : stem, 타겟에서 확장자를 제외한 값
-
+# juice: 타겟 명칭
+# $(OBJECTS)  선행정보
 juice: $(OBJECTS)
 	$(CC) -o $@ $^
 	@echo The first prerequisite is: $<
